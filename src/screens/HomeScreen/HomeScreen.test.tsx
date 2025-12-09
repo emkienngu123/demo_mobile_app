@@ -119,7 +119,7 @@ describe('HomeScreen', () => {
       const firstTask = screen.getByTestId('task-toggle-1');
       fireEvent.press(firstTask);
 
-      expect(screen.getByTestId('task-counter')).toHaveTextContent('1 of 2 completed');
+      expect(screen.getByTestId('task-counter')).toHaveTextContent('2 of 3 completed');
     });
 
     it('should toggle task back to incomplete', () => {
@@ -129,7 +129,7 @@ describe('HomeScreen', () => {
       fireEvent.press(firstTask);
       fireEvent.press(firstTask);
 
-      expect(screen.getByTestId('task-counter')).toHaveTextContent('0 of 2 completed');
+      expect(screen.getByTestId('task-counter')).toHaveTextContent('1 of 3 completed');
     });
 
     it('should handle multiple tasks being completed', () => {
@@ -141,7 +141,7 @@ describe('HomeScreen', () => {
       fireEvent.press(firstTask);
       fireEvent.press(secondTask);
 
-      expect(screen.getByTestId('task-counter')).toHaveTextContent('2 of 2 completed');
+      expect(screen.getByTestId('task-counter')).toHaveTextContent('3 of 3 completed');
     });
   });
 
@@ -153,7 +153,7 @@ describe('HomeScreen', () => {
       fireEvent.press(deleteButton);
 
       expect(screen.queryByText('Write unit tests')).toBeNull();
-      expect(screen.getByTestId('task-counter')).toHaveTextContent('0 of 1 completed');
+      expect(screen.getByTestId('task-counter')).toHaveTextContent('1 of 2 completed');
     });
 
     it('should show empty state when all tasks are deleted', () => {
@@ -161,9 +161,12 @@ describe('HomeScreen', () => {
 
       const deleteButton1 = screen.getByTestId('task-delete-1');
       const deleteButton2 = screen.getByTestId('task-delete-2');
+      const deleteButton3 = screen.getByTestId('task-delete-3');
 
       fireEvent.press(deleteButton1);
       fireEvent.press(deleteButton2);
+      fireEvent.press(deleteButton3);
+
 
       expect(screen.getByTestId('empty-state')).toBeTruthy();
       expect(screen.getByText('No tasks yet!')).toBeTruthy();
@@ -181,7 +184,7 @@ describe('HomeScreen', () => {
       const deleteButton = screen.getByTestId('task-delete-1');
       fireEvent.press(deleteButton);
 
-      expect(screen.getByTestId('task-counter')).toHaveTextContent('0 of 1 completed');
+      expect(screen.getByTestId('task-counter')).toHaveTextContent('1 of 2 completed');
     });
   });
 
@@ -223,16 +226,16 @@ describe('HomeScreen', () => {
 
       expect(screen.getByText('Integration test task')).toBeTruthy();
 
-      const newTaskToggle = screen.getAllByTestId(/task-toggle-/)[2];
+      const newTaskToggle = screen.getAllByTestId(/task-toggle-/)[3];
       fireEvent.press(newTaskToggle);
 
-      expect(screen.getByTestId('task-counter')).toHaveTextContent('0 of 4 completed');
+      expect(screen.getByTestId('task-counter')).toHaveTextContent('2 of 4 completed');
 
-      const newTaskDelete = screen.getAllByTestId(/task-delete-/)[2];
+      const newTaskDelete = screen.getAllByTestId(/task-delete-/)[3];
       fireEvent.press(newTaskDelete);
 
       expect(screen.queryByText('Integration test task')).toBeNull();
-      expect(screen.getByTestId('task-counter')).toHaveTextContent('0 of 2 completed');
+      expect(screen.getByTestId('task-counter')).toHaveTextContent('1 of 3 completed');
     });
 
     it('should allow adding task by pressing enter on keyboard', () => {
