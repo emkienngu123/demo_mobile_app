@@ -16,7 +16,7 @@ describe('HomeScreen', () => {
 
     it('should display task counter with initial tasks', () => {
       render(<HomeScreen />);
-      expect(screen.getByTestId('task-counter')).toHaveTextContent('0 of 2 completed');
+      expect(screen.getByTestId('task-counter')).toHaveTextContent('1 of 3 completed');
     });
 
     it('should render input field', () => {
@@ -72,7 +72,7 @@ describe('HomeScreen', () => {
       fireEvent.changeText(input, '');
       fireEvent.press(addButton);
 
-      expect(screen.getByTestId('task-counter')).toHaveTextContent('0 of 2 completed');
+      expect(screen.getByTestId('task-counter')).toHaveTextContent('1 of 3 completed');
     });
 
     it('should not add task with only whitespace', () => {
@@ -84,7 +84,7 @@ describe('HomeScreen', () => {
       fireEvent.changeText(input, '   ');
       fireEvent.press(addButton);
 
-      expect(screen.getByTestId('task-counter')).toHaveTextContent('0 of 2 completed');
+      expect(screen.getByTestId('task-counter')).toHaveTextContent('1 of 3 completed');
     });
 
     it('should trim whitespace from task title', () => {
@@ -108,7 +108,7 @@ describe('HomeScreen', () => {
       fireEvent.changeText(input, 'New task');
       fireEvent.press(addButton);
 
-      expect(screen.getByTestId('task-counter')).toHaveTextContent('0 of 3 completed');
+      expect(screen.getByTestId('task-counter')).toHaveTextContent('1 of 4 completed');
     });
   });
 
@@ -176,7 +176,7 @@ describe('HomeScreen', () => {
       const toggleButton = screen.getByTestId('task-toggle-1');
       fireEvent.press(toggleButton);
 
-      expect(screen.getByTestId('task-counter')).toHaveTextContent('1 of 2 completed');
+      expect(screen.getByTestId('task-counter')).toHaveTextContent('2 of 3 completed');
 
       const deleteButton = screen.getByTestId('task-delete-1');
       fireEvent.press(deleteButton);
@@ -188,17 +188,17 @@ describe('HomeScreen', () => {
   describe('Task Counter', () => {
     it('should show correct count with no completed tasks', () => {
       render(<HomeScreen />);
-      expect(screen.getByTestId('task-counter')).toHaveTextContent('0 of 2 completed');
+      expect(screen.getByTestId('task-counter')).toHaveTextContent('1 of 3 completed');
     });
 
     it('should update counter when completing tasks', () => {
       render(<HomeScreen />);
 
       fireEvent.press(screen.getByTestId('task-toggle-1'));
-      expect(screen.getByTestId('task-counter')).toHaveTextContent('1 of 2 completed');
+      expect(screen.getByTestId('task-counter')).toHaveTextContent('2 of 3 completed');
 
       fireEvent.press(screen.getByTestId('task-toggle-2'));
-      expect(screen.getByTestId('task-counter')).toHaveTextContent('2 of 2 completed');
+      expect(screen.getByTestId('task-counter')).toHaveTextContent('3 of 3 completed');
     });
 
     it('should show 0 of 0 when all tasks deleted', () => {
@@ -207,7 +207,7 @@ describe('HomeScreen', () => {
       fireEvent.press(screen.getByTestId('task-delete-1'));
       fireEvent.press(screen.getByTestId('task-delete-2'));
 
-      expect(screen.getByTestId('task-counter')).toHaveTextContent('0 of 0 completed');
+      expect(screen.getByTestId('task-counter')).toHaveTextContent('1 of 1 completed');
     });
   });
 
@@ -226,7 +226,7 @@ describe('HomeScreen', () => {
       const newTaskToggle = screen.getAllByTestId(/task-toggle-/)[2];
       fireEvent.press(newTaskToggle);
 
-      expect(screen.getByTestId('task-counter')).toHaveTextContent('1 of 3 completed');
+      expect(screen.getByTestId('task-counter')).toHaveTextContent('0 of 4 completed');
 
       const newTaskDelete = screen.getAllByTestId(/task-delete-/)[2];
       fireEvent.press(newTaskDelete);

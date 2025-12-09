@@ -18,6 +18,7 @@ export default function HomeScreen() {
   const [tasks, setTasks] = useState<Task[]>([
     { id: '1', title: 'Write unit tests', completed: false },
     { id: '2', title: 'Setup CI/CD', completed: false },
+    { id: '3', title: 'Deploy to production', completed: true }
   ]);
   const [inputValue, setInputValue] = useState('');
 
